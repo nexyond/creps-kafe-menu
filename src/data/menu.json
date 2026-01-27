@@ -5,11 +5,11 @@
                 "urun_adi": "Çikolatalı Crep",
                 "aciklama": "Özel sürülebilir çikolata ile doldurulmuş yumuşak krep katları.",
                 "fiyat": "70",
-                "foto_link": "src/logo/creps.jpg",
+                "foto_link": "",
                 "indirim_var": "HAYIR",
                 "indirimli_fiyat": "",
                 "stok": "EVET",
-                "populer": "HAYIR<"
+                "populer": "HAYIR"
             },
             {
                 "kategori": "CREP",
