@@ -13,6 +13,17 @@
             },
             {
                 "kategori": "CREP",
+                "urun_adi": "Crep's Tahinli",
+                "aciklama": "Tahin aromalı krep.",
+                "fiyat": "80",
+                "foto_link": "",
+                "indirim_var": "HAYIR",
+                "indirimli_fiyat": "",
+                "stok": "EVET",
+                "populer": "HAYIR"
+            },
+            {
+                "kategori": "CREP",
                 "urun_adi": "Muzlu Crep",
                 "aciklama": "Taze muz dilimleri ve yoğun çikolata sosu ile sarılmış lezzet.",
                 "fiyat": "90",
