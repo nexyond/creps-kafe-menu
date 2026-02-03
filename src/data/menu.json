@@ -310,6 +310,17 @@
             },
             {
                 "kategori": "SOĞUK İÇECEKLER",
+                "urun_adi": "Gazoz",
+                "aciklama": "Bol asitli, ferahlatıcı meşrubat.",
+                "fiyat": "80",
+                "foto_link": "",
+                "indirim_var": "HAYIR",
+                "indirimli_fiyat": "",
+                "stok": "EVET",
+                "populer": "HAYIR"
+            },
+            {
+                "kategori": "SOĞUK İÇECEKLER",
                 "urun_adi": "Meyveli Soda",
                 "aciklama": "Limon, Karpuz, Elma, Nar ...",
                 "fiyat": "50",
@@ -368,6 +379,17 @@
                 "urun_adi": "Türk Kahvesi",
                 "aciklama": "Bol köpüklü klasik Türk kahvesi.",
                 "fiyat": "70",
+                "foto_link": "",
+                "indirim_var": "HAYIR",
+                "indirimli_fiyat": "",
+                "stok": "EVET",
+                "populer": "HAYIR"
+            },
+            {
+                "kategori": "SICAK KAHVELER",
+                "urun_adi": "Double Türk Kahvesi",
+                "aciklama": "Büyük boy, bol köpüklü klasik Türk kahvesi.",
+                "fiyat": "120",
                 "foto_link": "",
                 "indirim_var": "HAYIR",
                 "indirimli_fiyat": "",
@@ -511,6 +533,17 @@
                 "urun_adi": "Americano",
                 "aciklama": "Espresso üzerine eklenen sıcak su ile hazırlanan lezzet",
                 "fiyat": "70",
+                "foto_link": "",
+                "indirim_var": "HAYIR",
+                "indirimli_fiyat": "",
+                "stok": "EVET",
+                "populer": "HAYIR"
+            },
+            {
+                "kategori": "SICAK KAHVELER",
+                "urun_adi": "Double Americano",
+                "aciklama": "Büyük boy Americano.",
+                "fiyat": "120",
                 "foto_link": "",
                 "indirim_var": "HAYIR",
                 "indirimli_fiyat": "",
