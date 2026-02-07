@@ -409,6 +409,17 @@
             },
             {
                 "kategori": "SICAK KAHVELER",
+                "urun_adi": "Menengiç Kahvesi",
+                "aciklama": "Menengiç ağacının meyvelerinden hazırlanan, özgün aromalı geleneksel lezzet.",
+                "fiyat": "80",
+                "foto_link": "",
+                "indirim_var": "HAYIR",
+                "indirimli_fiyat": "",
+                "stok": "EVET",
+                "populer": "HAYIR"
+            },
+            {
+                "kategori": "SICAK KAHVELER",
                 "urun_adi": "Dibek Kahvesi",
                 "aciklama": "Kahve çekirdeklerinin çeşitli bitki ve aromalarla bir arada dövülmesiyle hazırlanan, yumuşak içimli ve yoğun aromalı geleneksel kahve karışımı.",
                 "fiyat": "80",
