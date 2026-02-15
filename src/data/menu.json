@@ -264,6 +264,17 @@
                 "stok": "EVET",
                 "populer": "HAYIR"
             },
+        {
+                "kategori": "SICAK İÇECEKLER",
+                "urun_adi": "Beyaz Çikolata",
+                "aciklama": "Beyaz çikolata ile hazırlanan sıcak çikolata.",
+                "fiyat": "90",
+                "foto_link": "",
+                "indirim_var": "HAYIR",
+                "indirimli_fiyat": "",
+                "stok": "EVET",
+                "populer": "HAYIR"
+            },
             {
                 "kategori": "SOĞUK İÇECEKLER",
                 "urun_adi": "Meyve Suyu",
