@@ -46,6 +46,17 @@
             },
             {
                 "kategori": "CREP",
+                "urun_adi": "Kakaolu Crep",
+                "aciklama": "Kakaolu krep hamuru içerisinde, yoğun çikolata dolgusu ve eşsiz lezzet.",
+                "fiyat": "100",
+                "foto_link": "",
+                "indirim_var": "HAYIR",
+                "indirimli_fiyat": "",
+                "stok": "EVET",
+                "populer": "HAYIR"
+            },
+            {
+                "kategori": "CREP",
                 "urun_adi": "Crep Karışık",
                 "aciklama": "Muz, Kivi, Çilek ile hazırlanan krep.",
                 "fiyat": "130",
@@ -159,6 +170,17 @@
                 "urun_adi": "Karışık Crep Spaghetti",
                 "aciklama": "Karışık meyveli Crep Spaghetti.",
                 "fiyat": "250",
+                "foto_link": "",
+                "indirim_var": "HAYIR",
+                "indirimli_fiyat": "",
+                "stok": "EVET",
+                "populer": "HAYIR"
+            },
+            {
+                "kategori": "CREP",
+                "urun_adi": "Kakaolu ve Karışık Meyveli Crep Spaghetti",
+                "aciklama": "Karışık meyveli Crep Spaghetti ve Kakaonun birleşimi.",
+                "fiyat": "300",
                 "foto_link": "",
                 "indirim_var": "HAYIR",
                 "indirimli_fiyat": "",
