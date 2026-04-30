@@ -453,6 +453,17 @@
             },
             {
                 "kategori": "SOĞUK İÇECEKLER",
+                "urun_adi": "İtalyan Sodası",
+                "aciklama": "Soda ve seçtiğiniz aromanın birleşimiyle hazırlanan ferahlatıcı içecek.",
+                "fiyat": "100",
+                "foto_link": "",
+                "indirim_var": "HAYIR",
+                "indirimli_fiyat": "",
+                "stok": "EVET",
+                "populer": "HAYIR"
+            },
+            {
+                "kategori": "SOĞUK İÇECEKLER",
                 "urun_adi": "Meyveli Soda",
                 "aciklama": "Limon, Elma, Nar, Karpuz & Çilek ...",
                 "fiyat": "65",
