@@ -67,7 +67,7 @@ function parseCSV(text) {
 
 async function init() {
     try {
-        const sheetId = '1aAS3GiWnpN4teH5tvucjQI-eYeomPXl4UL4h0lmrbhI';
+        const sheetId = '1k6oL8nRiaSLLJiEggcHtXRhI7dQER_kc';
         const response = await fetch(`https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:csv`);
         const text = await response.text();
         menuData = parseCSV(text);
