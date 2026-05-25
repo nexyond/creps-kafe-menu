@@ -21,68 +21,132 @@ function scrollNav(amt) {
 
 function updateArrows() {
     const nw = document.getElementById('navWrapper');
+    if (!nw) return;
     document.getElementById('cL').style.display = nw.scrollLeft > 10 ? 'flex' : 'none';
     document.getElementById('cR').style.display = (nw.scrollWidth - nw.clientWidth - nw.scrollLeft) > 10 ? 'flex' : 'none';
 }
 
+function parseCSV(text) {
+    const lines = text.split('\n').map(line => line.trim()).filter(line => line);
+    if (!lines.length) return [];
+    
+    const headers = lines[0].split(',').map(h => h.replace(/^"|"$/g, '').trim());
+    
+    return lines.slice(1).map(line => {
+        let values = [];
+        let current = '';
+        let inQuotes = false;
+        
+        for (let i = 0; i < line.length; i++) {
+            let char = line[i];
+            if (char === '"') {
+                inQuotes = !inQuotes;
+            } else if (char === ',' && !inQuotes) {
+                values.push(current.trim());
+                current = '';
+            } else {
+                current += char;
+            }
+        }
+        values.push(current.trim());
+        
+        const obj = {};
+        headers.forEach((header, index) => {
+            let val = values[index] || '';
+            let cleanedVal = val.replace(/^"|"$/g, '').trim();
+            
+            if (header === 'kategori' && cleanedVal) {
+                cleanedVal = cleanedVal.toLocaleUpperCase('tr-TR');
+            }
+            
+            obj[header] = cleanedVal;
+        });
+        return obj;
+    });
+}
+
 async function init() {
     try {
-        const response = await fetch('src/data/menu.json');
-        const data = await response.json();
-        menuData = data["creps-kafe"];
+        const sheetId = '1aAS3GiWnpN4teH5tvucjQI-eYeomPXl4UL4h0lmrbhI';
+        const response = await fetch(`https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:csv`);
+        const text = await response.text();
+        menuData = parseCSV(text);
 
-        const cats = [...new Set(menuData.map(i => i.kategori))];
+        const cats = [...new Set(menuData.map(i => i.kategori).filter(Boolean))];
         const nav = document.getElementById('navWrapper');
         nav.innerHTML = cats.map(c => `<div class="cat-link" onclick="scrollToCategory('${c}', this)">${c}</div>`).join('');
         nav.addEventListener('scroll', updateArrows);
-        setTimeout(updateArrows, 300);
 
-        render(menuData);
+        window.addEventListener('resize', updateArrows);
+        updateArrows();
+        render(menuData, cats);
         observeCategories();
-    } catch (err) {
-        console.error("Menü yüklenemedi:", err);
+    } catch (error) {
+        console.error("Menü yüklenirken hata oluştu:", error);
     }
 }
 
-function render(data) {
-    const cont = document.getElementById('menu-container');
-    if (!data || data.length === 0) {
-        cont.innerHTML = '<p style="text-align:center; opacity:0.5; margin-top:50px;">Ürün bulunamadı.</p>';
+function render(data, categoryOrder) {
+    const container = document.getElementById('menu-container');
+    if (!data.length) {
+        container.innerHTML = '<div class="no-results">Ürün bulunamadı.</div>';
         return;
     }
-    const groups = data.reduce((acc, i) => {
-        (acc[i.kategori] = acc[i.kategori] || []).push(i);
+    
+    const grouped = data.reduce((acc, item) => {
+        if (!item.kategori) return acc;
+        if (!acc[item.kategori]) acc[item.kategori] = [];
+        acc[item.kategori].push(item);
         return acc;
     }, {});
-    cont.innerHTML = Object.keys(groups).map(cat => `
-            <div class="category-section">
-                <div class="category-title">${cat}</div>
-                ${groups[cat].map(i => `
-                    <div class="menu-item ${i.stok === 'HAYIR' ? 'out-of-stock' : ''}">
-                        ${i.populer === 'EVET' ? '<div class="pop-badge">POPÜLER</div>' : ''}
-                        ${i.foto_link ? `<img src="${i.foto_link}" class="item-img">` : ''}
-                        <div class="item-info">
-                            <div class="item-header">
-                                <span class="item-name">${i.urun_adi}</span>
-                                <div class="item-price-box">
-                                    ${i.indirim_var === 'EVET' ? `<span class="old-price">${i.fiyat}₺</span>` : ''}
-                                    <span class="current-price">${i.indirim_var === 'EVET' ? i.indirimli_fiyat : i.fiyat}₺</span>
-                                </div>
-                            </div>
-                            ${i.aciklama ? `<div class="item-desc">${i.aciklama}</div>` : ''}
-                        </div>
-                    </div>`).join('')}
-            </div>`).join('');
+    
+    let html = '';
+    categoryOrder.forEach(cat => {
+        if (!grouped[cat]) return;
+        html += `<div class="category-section">
+            <h2 class="category-title">${cat}</h2>
+            <div class="items-grid">`;
+        grouped[cat].forEach(i => {
+            html += `<div class="menu-item">
+                <div class="item-header">
+                    <h3 class="item-name">${i.urun_adi}</h3>
+                    <div class="item-price-box">
+                        <span class="current-price">${i.fiyat} TL</span>
+                    </div>
+                </div>
+                ${i.aciklama ? `<p class="item-desc">${i.aciklama}</p>` : ''}
+            </div>`;
+        });
+        html += `</div></div>`;
+    });
+    container.innerHTML = html;
 }
 
-function search(val) {
-    const term = val.toLowerCase().trim();
-    const filtered = menuData.filter(i => 
-        i.urun_adi.toLowerCase().includes(term) || 
-        i.kategori.toLowerCase().includes(term) ||
-        (i.aciklama && i.aciklama.toLowerCase().includes(term))
+function search(term) {
+    term = term.toLocaleLowerCase('tr-TR').trim();
+    if (!term) {
+        const orderedCats = [];
+        menuData.forEach(item => {
+            if (item.kategori && !orderedCats.includes(item.kategori)) {
+                orderedCats.push(item.kategori);
+            }
+        });
+        render(menuData, orderedCats);
+        return;
+    }
+    const filtered = menuData.filter(i =>
+        (i.urun_adi && i.urun_adi.toLocaleLowerCase('tr-TR').includes(term)) ||
+        (i.kategori && i.kategori.toLocaleLowerCase('tr-TR').includes(term)) ||
+        (i.aciklama && i.aciklama.toLocaleLowerCase('tr-TR').includes(term))
     );
-    render(filtered);
+    
+    const orderedCats = [];
+    filtered.forEach(item => {
+        if (item.kategori && !orderedCats.includes(item.kategori)) {
+            orderedCats.push(item.kategori);
+        }
+    });
+    render(filtered, orderedCats);
 }
 
 function scrollToCategory(catName, el) {
